@@ -4,6 +4,7 @@ using namespace std;
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
+    int tmp;
     vector<string> zadania;
 
 
@@ -29,7 +30,14 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
                 break;
             }
             case 3:{
-                
+                cout<<"Ktore zadanie usunac: ";
+                cin>>tmp;
+                if(zadania.size()>=tmp and tmp>0){
+                    zadania.erase(zadania.begin()+tmp-1);
+                }
+                else{
+                    cout<<"Bledny numer zadania"<<endl;
+                }
                 break;
             }
         }
