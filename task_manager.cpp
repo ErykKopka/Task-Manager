@@ -16,9 +16,8 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     while(getline(odczyt, tekst)){
         zadania.push_back(tekst);
     }
+    odczyt.close();
     ofstream zapis("zadania.txt");
-    
-
 
     do{
         clearScreen();
