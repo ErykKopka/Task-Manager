@@ -1,3 +1,4 @@
+test
+zadanie
 chuj
-zadanie1
-gowno
+zadanie2
