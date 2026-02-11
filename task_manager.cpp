@@ -2,7 +2,7 @@
 #include<vector>
 using namespace std;
 
-int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe 
+int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
     vector<string> zadania;
 
@@ -17,16 +17,19 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
 
         switch(menu){
             case 1:{
-                
+                for(int i=0;i<zadania.size();i++){
+                    cout<<i+1<<" "<<zadania.at(i)<<endl;
+                }
                 break;
             }
             case 2:{
-                break;
-            }
-            case 3:{
                 zadania.resize(zadania.size()+1);
                 cout<<"Wpisz tresc zadania: ";
                 cin>>zadania.back();
+                break;
+            }
+            case 3:{
+                
                 break;
             }
         }
