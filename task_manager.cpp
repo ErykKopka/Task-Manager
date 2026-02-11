@@ -1,11 +1,19 @@
 #include<iostream>
 #include<vector>
+#include<fstream>
 using namespace std;
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
     int tmp;
+    string tekst;
+    ifstream odczyt("zadania.txt");
     vector<string> zadania;
+    while(getline(odczyt, tekst)){
+        zadania.push_back(tekst);
+    }
+    ofstream zapis("zadania.txt");
+    
 
 
     do{
@@ -43,5 +51,11 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
         }
 
     }while(menu!=0);
+
+    for(string zadanie : zadania){
+        zapis<<zadanie<<endl;
+    }
+
+    zapis.close();
     return 0;
 }
