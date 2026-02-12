@@ -47,8 +47,11 @@ private:
     vector<Task> tasks;
     int nextId=1;
 public:
-    const Task& getTask(int id) const {
+    const Task& getTask(int id) const{
         return tasks.at(id);
+    }
+    int getTaskCount() const{
+        return tasks.size();
     }
     void addTask(string title,string desc){
         tasks.emplace_back(nextId,title,desc);
