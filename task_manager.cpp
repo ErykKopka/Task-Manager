@@ -3,6 +3,7 @@
 #include<vector>
 #include<fstream>
 #include<map>
+#include<algorithm>
 using namespace std;
 
 void clearScreen(){
@@ -11,14 +12,14 @@ void clearScreen(){
 
 class Task{
 private:
-    const int id;
+    int id;
     string taskTitle;
     string taskDesc;
     bool completed;
 public:
     Task(int id, string taskTitle, string taskDesc="")
     : id(id), taskTitle(taskTitle), taskDesc(taskDesc), completed(false){}
-    int getId(){
+    int getId() const{
         return id;
     }
     const string& getTitle() const{
@@ -36,13 +37,8 @@ public:
     void changeDesc(string desc){
         taskDesc=desc;
     }
-    void swtichCompletion(bool completion){
-        if(completion==false){
-            completed=true;
-        }
-        else{
-            completed=false;
-        }
+    void switchCompletion(bool completion){
+        completed=!completed;
     }
 };
 
@@ -52,7 +48,8 @@ private:
     int nextId=1;
 public:
     const Task& getTask(int id) const{
-        return tasks.at(id);
+        auto it = std::find_if(tasks.begin(), tasks.end(), [id](const Task& t){ return t.getId() == id; });
+        if(it != tasks.end()) return *it;
     }
     const std::vector<Task>& getTasks() const{
         return tasks;
@@ -65,7 +62,10 @@ public:
         nextId++;
     }
     void removeTask(int id){
-        
+        auto it=find_if(tasks.begin(),tasks.end(),[id](const Task& obj){return id==obj.getId();});
+        if(it!=tasks.end()){
+            tasks.erase(it);
+        }
     }
 };
 
@@ -79,11 +79,11 @@ int main(){  //{}  =  + [] g++ task_manager.cpp -o task_manager.exe
         clearScreen();
         idMap.clear();
         displayCounter=1;
-        for(Task task : manager.getTasks()){
-            cout<<displayCounter<<". "<<task.getTitle()<<endl;
-            idMap[displayCounter]=task.getId();
+        for(const Task& task : manager.getTasks()){
+            cout << displayCounter << ". " << task.getTitle() << endl;
+            idMap[displayCounter] = task.getId();
             displayCounter++;
-        } 
+        }
         cout<<endl<<endl;
 
         cout<<"1 - Add task"<<endl;
@@ -94,17 +94,25 @@ int main(){  //{}  =  + [] g++ task_manager.cpp -o task_manager.exe
 
         switch(menu){
             case 1:{
+                cin.ignore();
                 cout<<"Task name: ";
-                cin>>text;
+                getline(cin, text);
                 cout<<"Task description: ";
-                cin>>text2;
+                getline(cin, text2);
                 manager.addTask(text,text2);
                 break;
             }
             case 2:{
                 cout<<"Which task to remove: ";
                 cin>>tmp;
-                
+                tmp=idMap.at(tmp);
+                auto it = idMap.find(tmp);
+                if(it != idMap.end()){
+                    manager.removeTask(tmp);
+                } 
+                else{
+                    cout<<"Zadanie nr.  "<<tmp<<" nie istnieje."<<endl;
+                }
                 break;
             }
         }
