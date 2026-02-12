@@ -64,13 +64,13 @@ public:
         tasks.emplace_back(nextId,title,desc);
         nextId++;
     }
-    void removeTask(){
-
+    void removeTask(int id){
+        
     }
 };
 
 int main(){  //{}  =  + [] g++ task_manager.cpp -o task_manager.exe
-    int menu;
+    int menu,tmp;
     string text,text2;
     TaskManager manager;
     map<int,int> idMap;
@@ -102,6 +102,8 @@ int main(){  //{}  =  + [] g++ task_manager.cpp -o task_manager.exe
                 break;
             }
             case 2:{
+                cout<<"Which task to remove: ";
+                cin>>tmp;
                 
                 break;
             }
