@@ -35,18 +35,18 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
         switch(menu){
             case 1:{
                 tasks.resize(tasks.size()+1);
-                cout<<"Wpisz tresc tasks: ";
+                cout<<"Task name: ";
                 cin>>tasks.back();
                 break;
             }
             case 2:{
-                cout<<"Ktore zadanie usunac: ";
+                cout<<"Which task to remove: ";
                 cin>>tmp;
                 if(tasks.size()>=tmp and tmp>0){
                     tasks.erase(tasks.begin()+tmp-1);
                 }
                 else{
-                    cout<<"Bledny numer zadania"<<endl;
+                    cout<<"Wrong task number. "<<endl;
                 }
                 break;
             }
