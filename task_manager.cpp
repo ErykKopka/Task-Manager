@@ -26,9 +26,9 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
         }
         cout<<endl<<endl;
 
-        cout<<"1 - Dodaj zadanie"<<endl;
-        cout<<"2 - Usun zadanie"<<endl;
-        cout<<"0 - Wyjscie"<<endl;
+        cout<<"1 - Add task"<<endl;
+        cout<<"2 - Remove task"<<endl;
+        cout<<"0 - Exit"<<endl;
 
         cin>>menu;
 
