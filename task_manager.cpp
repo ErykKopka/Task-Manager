@@ -26,6 +26,20 @@ public:
     bool isCompleted() const{
         return completed;
     }
+    void changeTitle(string title){
+        taskTitle=title;
+    }
+    void changeDesc(string desc){
+        taskDesc=desc;
+    }
+    void swtichCompletion(bool completion){
+        if(completion==false){
+            completed=true;
+        }
+        else{
+            completed=false;
+        }
+    }
 };
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
