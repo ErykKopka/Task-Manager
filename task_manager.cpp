@@ -42,6 +42,19 @@ public:
     }
 };
 
+class TaskManager{
+private:
+    vector<Task> tasks;
+    int nextId=1;
+public:
+    void addTask(string title,string desc){
+        tasks.emplace_back(title,desc);
+    }
+    void removeTask(){
+
+    }
+};
+
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
     int tmp;
