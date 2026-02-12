@@ -10,19 +10,19 @@ void clearScreen(){
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
     int tmp;
-    string tekst;
-    ifstream odczyt("zadania.txt");
-    vector<string> zadania;
-    while(getline(odczyt, tekst)){
-        zadania.push_back(tekst);
+    string text;
+    ifstream read("tasks.txt");
+    vector<string> tasks;
+    while(getline(read, text)){
+        tasks.push_back(text);
     }
-    odczyt.close();
-    ofstream zapis("zadania.txt");
+    read.close();
+    ofstream save("tasks.txt");
 
     do{
         clearScreen();
-        for(int i=0;i<zadania.size();i++){
-            cout<<i+1<<" "<<zadania.at(i)<<endl;
+        for(int i=0;i<tasks.size();i++){
+            cout<<i+1<<" "<<tasks.at(i)<<endl;
         }
         cout<<endl<<endl;
 
@@ -34,16 +34,16 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
 
         switch(menu){
             case 1:{
-                zadania.resize(zadania.size()+1);
-                cout<<"Wpisz tresc zadania: ";
-                cin>>zadania.back();
+                tasks.resize(tasks.size()+1);
+                cout<<"Wpisz tresc tasks: ";
+                cin>>tasks.back();
                 break;
             }
             case 2:{
                 cout<<"Ktore zadanie usunac: ";
                 cin>>tmp;
-                if(zadania.size()>=tmp and tmp>0){
-                    zadania.erase(zadania.begin()+tmp-1);
+                if(tasks.size()>=tmp and tmp>0){
+                    tasks.erase(tasks.begin()+tmp-1);
                 }
                 else{
                     cout<<"Bledny numer zadania"<<endl;
@@ -54,10 +54,10 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
 
     }while(menu!=0);
 
-    for(string zadanie : zadania){
-        zapis<<zadanie<<endl;
+    for(string task : tasks){
+        save<<task<<endl;
     }
 
-    zapis.close();
+    save.close();
     return 0;
 }
