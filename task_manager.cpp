@@ -1,4 +1,5 @@
 #include<iostream>
+#include<string>
 #include<vector>
 #include<fstream>
 using namespace std;
@@ -6,6 +7,26 @@ using namespace std;
 void clearScreen(){
     cout<<"\033[2J\033[1;1H";
 }
+
+class Task{
+private:
+    const int id;
+    string taskTitle;
+    string taskDesc;
+    bool completed;
+public:
+    Task(int id, string taskTitle, string taskDesc="")
+    : id(id), taskTitle(taskTitle), taskDesc(taskDesc), completed(false){}
+    const string& getTitle() const{
+        return taskTitle;
+    }
+    const string& getDesc() const{
+        return taskDesc;
+    }
+    bool isCompleted() const{
+        return completed;
+    }
+};
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
