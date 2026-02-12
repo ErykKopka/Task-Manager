@@ -47,6 +47,9 @@ private:
     vector<Task> tasks;
     int nextId=1;
 public:
+    const Task& getTask(int id) const {
+        return tasks.at(id);
+    }
     void addTask(string title,string desc){
         tasks.emplace_back(nextId,title,desc);
         nextId++;
@@ -58,12 +61,13 @@ public:
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
-    string text;
+    string text,text2;
 
     TaskManager manager;
 
     do{
         clearScreen();
+        
         cout<<endl<<endl;
 
         cout<<"1 - Add task"<<endl;
@@ -74,8 +78,11 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
 
         switch(menu){
             case 1:{
-                
-
+                cout<<"Task name: ";
+                cin>>text;
+                cout<<"Task description: ";
+                cin>>text2;
+                manager.addTask(text,text2);
                 break;
             }
             case 2:{
