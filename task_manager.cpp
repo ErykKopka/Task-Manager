@@ -2,6 +2,7 @@
 #include<string>
 #include<vector>
 #include<fstream>
+#include<map>
 using namespace std;
 
 void clearScreen(){
@@ -17,6 +18,9 @@ private:
 public:
     Task(int id, string taskTitle, string taskDesc="")
     : id(id), taskTitle(taskTitle), taskDesc(taskDesc), completed(false){}
+    int getId(){
+        return id;
+    }
     const string& getTitle() const{
         return taskTitle;
     }
@@ -50,9 +54,12 @@ public:
     const Task& getTask(int id) const{
         return tasks.at(id);
     }
+    const std::vector<Task>& getTasks() const{
+        return tasks;
+    }   
     int getTaskCount() const{
         return tasks.size();
-    }
+    } 
     void addTask(string title,string desc){
         tasks.emplace_back(nextId,title,desc);
         nextId++;
@@ -62,15 +69,21 @@ public:
     }
 };
 
-int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
+int main(){  //{}  =  + [] g++ task_manager.cpp -o task_manager.exe
     int menu;
     string text,text2;
-
     TaskManager manager;
-
+    map<int,int> idMap;
+    int displayCounter;
     do{
         clearScreen();
-        
+        idMap.clear();
+        displayCounter=1;
+        for(Task task : manager.getTasks()){
+            cout<<displayCounter<<". "<<task.getTitle()<<endl;
+            idMap[displayCounter]=task.getId();
+            displayCounter++;
+        } 
         cout<<endl<<endl;
 
         cout<<"1 - Add task"<<endl;
