@@ -48,7 +48,8 @@ private:
     int nextId=1;
 public:
     void addTask(string title,string desc){
-        tasks.emplace_back(title,desc);
+        tasks.emplace_back(nextId,title,desc);
+        nextId++;
     }
     void removeTask(){
 
@@ -57,21 +58,12 @@ public:
 
 int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
     int menu;
-    int tmp;
     string text;
-    ifstream read("tasks.txt");
-    vector<string> tasks;
-    while(getline(read, text)){
-        tasks.push_back(text);
-    }
-    read.close();
-    ofstream save("tasks.txt");
+
+    TaskManager manager;
 
     do{
         clearScreen();
-        for(int i=0;i<tasks.size();i++){
-            cout<<i+1<<" "<<tasks.at(i)<<endl;
-        }
         cout<<endl<<endl;
 
         cout<<"1 - Add task"<<endl;
@@ -82,30 +74,17 @@ int main(){  //{}  =  +  g++ task_manager.cpp -o task_manager.exe
 
         switch(menu){
             case 1:{
-                tasks.resize(tasks.size()+1);
-                cout<<"Task name: ";
-                cin>>tasks.back();
+                
+
                 break;
             }
             case 2:{
-                cout<<"Which task to remove: ";
-                cin>>tmp;
-                if(tasks.size()>=tmp and tmp>0){
-                    tasks.erase(tasks.begin()+tmp-1);
-                }
-                else{
-                    cout<<"Wrong task number. "<<endl;
-                }
+                
                 break;
             }
         }
 
     }while(menu!=0);
 
-    for(string task : tasks){
-        save<<task<<endl;
-    }
-
-    save.close();
     return 0;
 }
